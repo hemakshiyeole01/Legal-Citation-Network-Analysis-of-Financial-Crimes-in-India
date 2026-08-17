@@ -1,0 +1,28 @@
+# Data (large files, never commit)
+data/raw/*
+data/extracted/*
+data/processed/*
+data/final/*
+!data/**/.gitkeep
+
+# Output (regenerable, don't commit large graph/image files - keep small ones if you want)
+output/graphs/*
+!output/graphs/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Env vars / secrets
+.env
+*.json
+!ontology/**/*.json
