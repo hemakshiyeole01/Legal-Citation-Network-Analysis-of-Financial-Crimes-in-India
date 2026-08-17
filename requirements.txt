@@ -1,0 +1,17 @@
+# Extraction
+requests
+kagglehub
+pdfplumber
+pandas
+tqdm
+
+# Preprocessing / NLP (later stages)
+spacy
+nltk
+
+# Network analysis (later stages)
+networkx
+pyvis
+
+# Utility
+python-dotenv
