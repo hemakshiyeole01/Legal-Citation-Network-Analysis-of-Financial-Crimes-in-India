@@ -73,6 +73,14 @@ tests/                      (optional/stretch) sanity checks on pipeline outputs
 - kaggle.com -> Account -> Create New API Token (downloads `kaggle.json`)
 - Place at `~/.kaggle/kaggle.json` (Mac/Linux) or `C:\Users\<you>\.kaggle\kaggle.json` (Windows)
 
+## Workflow
+
+Each stage folder (`extraction/`, `preprocessing/`, `retrieval/`, `network/`,
+`analysis/`, `output/`) gets its own `README.md` as code is added to it -
+check that folder's README for stage-specific run instructions and output
+format. This top-level README only tracks overall setup and the run order
+across stages.
+
 ## Running the Pipeline So Far
 
 ```
@@ -82,6 +90,8 @@ python extraction/pdf_extraction/combine_years.py
 ```
 
 Output lands in `data/extracted/` (per-year) and `data/processed/all_judgments_raw_text.csv` (combined).
+
+See `extraction/download/README.md` and `extraction/pdf_extraction/README.md` for details on each script.
 
 ## Syncing to GitHub
 
