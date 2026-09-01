@@ -77,7 +77,10 @@ def build_citation_lookup():
 
 
 def load_domain_membership():
-    """file_name -> domain, for classifying edges as internal/cross-domain."""
+    """file_name -> set of domains. A judgment can legitimately match more
+    than one domain (e.g. a case involving both cheating and bribery) - a
+    plain dict overwrite here would silently lose that and misclassify
+    edges for any multi-domain judgment."""
     membership = {}
     for domain, filename in DOMAIN_FILES.items():
         path = os.path.join(DATA_FINAL, filename)
@@ -85,17 +88,17 @@ def load_domain_membership():
             continue
         df = pd.read_csv(path)
         for fname in df["file_name"]:
-            membership[fname] = domain
+            membership.setdefault(fname, set()).add(domain)
     return membership
 
 
 def classify_edge(citing_domain, cited_file_name, membership):
     if cited_file_name is None:
         return "UNRESOLVED"
-    cited_domain = membership.get(cited_file_name)
-    if cited_domain is None:
+    cited_domains = membership.get(cited_file_name)
+    if not cited_domains:
         return "OUTSIDE_DOMAINS"
-    if cited_domain == citing_domain:
+    if citing_domain in cited_domains:
         return "INTERNAL"
     return "CROSS_DOMAIN"
 
@@ -124,7 +127,7 @@ def main():
                 "citing_domain": domain,
                 "cited_citation_normalized": r["citation_normalized"],
                 "cited_file_name": cited_file,
-                "cited_domain": membership.get(cited_file) if cited_file else None,
+                "cited_domain": "; ".join(sorted(membership.get(cited_file, []))) if cited_file else None,
                 "edge_type": edge_type,
             })
 

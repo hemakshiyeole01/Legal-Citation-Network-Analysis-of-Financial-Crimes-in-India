@@ -18,6 +18,19 @@ Every citation mention gets classified:
 - **UNRESOLVED** - not found anywhere in the full corpus (outside the
   Kaggle dataset, or a citation format we couldn't match)
 
+## Bug found and fixed during testing
+Some judgments genuinely match more than one domain (your full run: 1,127
++ 678 + 272 = 2,077 domain-file rows, but only 1,679 unique judgments
+matched at all - meaning 398 judgments appear in 2+ domain corpora at
+once). The original domain-membership lookup used a plain dict overwrite,
+so any multi-domain judgment silently "forgot" all but the last domain
+processed, causing wrong INTERNAL/CROSS_DOMAIN classification for those
+398 judgments. Fixed by storing a set of domains per judgment instead of
+a single value - verified against real data with an overlapping test
+case.
+**If you already have edge files from before this fix, re-run
+build_edges.py to regenerate them with correct classifications.**
+
 ## Output (per domain)
 - `*_edges_all.csv` - every citation mention with its classification, for
   cross-domain analysis later
