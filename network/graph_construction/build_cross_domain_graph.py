@@ -22,14 +22,9 @@ import pandas as pd
 import networkx as nx
 
 from config.paths import DATA_FINAL, OUTPUT_GRAPHS, OUTPUT_TABLES
+from config.domains import get_domains, domain_to_filename, corpus_filename as get_corpus_filename
 
 EDGES_DIR = os.path.join(os.path.dirname(__file__), "..", "citation_network")
-
-DOMAIN_FILES = {
-    "Financial Fraud": "financial_fraud_corpus.csv",
-    "Corruption": "corruption_corpus.csv",
-    "Digital Financial Fraud": "digital_financial_fraud_corpus.csv",
-}
 
 
 def file_name_to_title(file_name: str) -> str:
@@ -49,8 +44,8 @@ def main():
     # processed silently overwrite the others.
     node_domains = {}
     node_attrs = {}
-    for domain, corpus_filename in DOMAIN_FILES.items():
-        corpus_path = os.path.join(DATA_FINAL, corpus_filename)
+    for domain in get_domains():
+        corpus_path = os.path.join(DATA_FINAL, get_corpus_filename(domain))
         if not os.path.exists(corpus_path):
             print(f"Skipping {domain} nodes - corpus file not found")
             continue
@@ -73,9 +68,9 @@ def main():
 
     # Add edges - both INTERNAL and CROSS_DOMAIN (both have real endpoints
     # inside our 3 domains; OUTSIDE_DOMAINS and UNRESOLVED don't)
-    for domain in DOMAIN_FILES:
+    for domain in get_domains():
         edges_path = os.path.join(
-            EDGES_DIR, f"{domain.lower().replace(' ', '_')}_edges_all.csv"
+            EDGES_DIR, f"{domain_to_filename(domain)}_edges_all.csv"
         )
         if not os.path.exists(edges_path):
             print(f"Skipping {domain} edges - file not found")

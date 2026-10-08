@@ -20,14 +20,9 @@ import pandas as pd
 import networkx as nx
 
 from config.paths import DATA_FINAL, OUTPUT_GRAPHS
+from config.domains import get_domains, domain_to_filename, corpus_filename as get_corpus_filename
 
 EDGES_DIR = os.path.join(os.path.dirname(__file__), "..", "citation_network")
-
-DOMAIN_FILES = {
-    "Financial Fraud": "financial_fraud_corpus.csv",
-    "Corruption": "corruption_corpus.csv",
-    "Digital Financial Fraud": "digital_financial_fraud_corpus.csv",
-}
 
 
 def file_name_to_title(file_name: str) -> str:
@@ -38,10 +33,10 @@ def file_name_to_title(file_name: str) -> str:
     return name
 
 
-def build_domain_graph(domain: str, corpus_filename: str):
-    corpus_path = os.path.join(DATA_FINAL, corpus_filename)
+def build_domain_graph(domain: str, corpus_file: str):
+    corpus_path = os.path.join(DATA_FINAL, corpus_file)
     edges_path = os.path.join(
-        EDGES_DIR, f"{domain.lower().replace(' ', '_')}_edges_internal.csv"
+        EDGES_DIR, f"{domain_to_filename(domain)}_edges_internal.csv"
     )
 
     if not os.path.exists(corpus_path) or not os.path.exists(edges_path):
@@ -75,9 +70,9 @@ def main():
     os.makedirs(OUTPUT_GRAPHS, exist_ok=True)
     summary_rows = []
 
-    for domain, corpus_filename in DOMAIN_FILES.items():
+    for domain in get_domains():
         print(f"\nBuilding graph: {domain}")
-        G = build_domain_graph(domain, corpus_filename)
+        G = build_domain_graph(domain, get_corpus_filename(domain))
         if G is None:
             continue
 
@@ -92,7 +87,7 @@ def main():
         print(f"  Isolated nodes (no citations in/out): {isolated} ({isolated/n_nodes*100:.1f}%)")
 
         out_path = os.path.join(
-            OUTPUT_GRAPHS, f"{domain.lower().replace(' ', '_')}_graph.gpickle"
+            OUTPUT_GRAPHS, f"{domain_to_filename(domain)}_graph.gpickle"
         )
         with open(out_path, "wb") as f:
             pickle.dump(G, f)
@@ -100,7 +95,7 @@ def main():
 
         # Also save GraphML - human-readable, opens directly in Gephi if wanted
         graphml_path = os.path.join(
-            OUTPUT_GRAPHS, f"{domain.lower().replace(' ', '_')}_graph.graphml"
+            OUTPUT_GRAPHS, f"{domain_to_filename(domain)}_graph.graphml"
         )
         nx.write_graphml(G, graphml_path)
 

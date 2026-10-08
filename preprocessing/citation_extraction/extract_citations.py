@@ -22,15 +22,10 @@ import pandas as pd
 from tqdm import tqdm
 
 from config.paths import DATA_FINAL, DATA_PROCESSED
+from config.domains import get_domains, domain_to_filename, corpus_filename
 
 CITATIONS_OUT_DIR = os.path.join(DATA_PROCESSED, "citations")
 os.makedirs(CITATIONS_OUT_DIR, exist_ok=True)
-
-DOMAIN_FILES = {
-    "Financial Fraud": "financial_fraud_corpus.csv",
-    "Corruption": "corruption_corpus.csv",
-    "Digital Financial Fraud": "digital_financial_fraud_corpus.csv",
-}
 
 # Matches: AIR1982SC149, AIR 1981 SC 344, AIR\n1961 SC 4931
 AIR_PATTERN = re.compile(r"AIR\s*(\d{4})\s*([A-Za-z]{2,6})\s*(\d+)", re.IGNORECASE)
@@ -117,7 +112,7 @@ def process_domain(domain_name: str, filename: str):
             })
 
     out_df = pd.DataFrame(rows)
-    out_path = os.path.join(CITATIONS_OUT_DIR, f"{domain_name.lower().replace(' ', '_')}_citations.csv")
+    out_path = os.path.join(CITATIONS_OUT_DIR, f"{domain_to_filename(domain_name)}_citations.csv")
     out_df.to_csv(out_path, index=False)
 
     unique_cases_citing = out_df["citing_file_name"].nunique() if len(out_df) else 0
@@ -126,8 +121,8 @@ def process_domain(domain_name: str, filename: str):
 
 
 def main():
-    for domain_name, filename in DOMAIN_FILES.items():
-        process_domain(domain_name, filename)
+    for domain_name in get_domains():
+        process_domain(domain_name, corpus_filename(domain_name))
 
 
 if __name__ == "__main__":

@@ -19,17 +19,14 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 from pyvis.network import Network
 
 from config.paths import OUTPUT_GRAPHS, OUTPUT_VISUALIZATIONS
+from config.domains import get_domains, domain_to_filename, get_domain_colors
 
-DOMAIN_COLORS = {
-    "Financial Fraud": "#4C72B0",
-    "Corruption": "#DD8452",
-    "Digital Financial Fraud": "#55A868",
-}
+DOMAIN_COLORS = get_domain_colors()
 
 
 def visualize_domain_graph(domain: str):
     graph_path = os.path.join(
-        OUTPUT_GRAPHS, f"{domain.lower().replace(' ', '_')}_graph.gpickle"
+        OUTPUT_GRAPHS, f"{domain_to_filename(domain)}_graph.gpickle"
     )
     if not os.path.exists(graph_path):
         print(f"Skipping {domain} - graph not found: {graph_path}")
@@ -65,7 +62,7 @@ def visualize_domain_graph(domain: str):
         net.add_edge(source, target)
 
     out_path = os.path.join(
-        OUTPUT_VISUALIZATIONS, f"{domain.lower().replace(' ', '_')}_network.html"
+        OUTPUT_VISUALIZATIONS, f"{domain_to_filename(domain)}_network.html"
     )
     net.write_html(out_path, open_browser=False, notebook=False)
     print(f"{domain}: {G_sub.number_of_nodes()} nodes, {G_sub.number_of_edges()} edges -> {out_path}")
@@ -114,7 +111,7 @@ def visualize_combined_graph():
 def main():
     os.makedirs(OUTPUT_VISUALIZATIONS, exist_ok=True)
 
-    for domain in DOMAIN_COLORS:
+    for domain in get_domains():
         visualize_domain_graph(domain)
 
     visualize_combined_graph()

@@ -20,15 +20,10 @@ sys.path.append(os.path.join(os.path.dirname(__file__), "..", ".."))
 import pandas as pd
 
 from config.paths import DATA_FINAL
+from config.domains import get_domains, corpus_filename
 
-SAMPLE_SIZE_PER_DOMAIN = 50
+SAMPLE_SIZE_PER_DOMAIN = 20
 RANDOM_SEED = 42
-
-DOMAIN_FILES = {
-    "Financial Fraud": "financial_fraud_corpus.csv",
-    "Corruption": "corruption_corpus.csv",
-    "Digital Financial Fraud": "digital_financial_fraud_corpus.csv",
-}
 
 
 def get_snippet(text: str, subcategory_field: str, window: int = 150) -> str:
@@ -59,8 +54,8 @@ def get_snippet(text: str, subcategory_field: str, window: int = 150) -> str:
 def main():
     all_samples = []
 
-    for domain, filename in DOMAIN_FILES.items():
-        path = os.path.join(DATA_FINAL, filename)
+    for domain in get_domains():
+        path = os.path.join(DATA_FINAL, corpus_filename(domain))
         if not os.path.exists(path):
             print(f"Skipping {domain} - file not found: {path}")
             continue

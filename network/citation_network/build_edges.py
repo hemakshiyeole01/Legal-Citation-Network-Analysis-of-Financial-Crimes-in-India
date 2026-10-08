@@ -29,17 +29,12 @@ import pandas as pd
 from tqdm import tqdm
 
 from config.paths import DATA_PROCESSED, DATA_FINAL
+from config.domains import get_domains, domain_to_filename, corpus_filename
 from extract_citations import AIR_PATTERN, SCC_PATTERN, SCR_PATTERN, normalize_citation, SELF_CITATION_LINE
 
 CITATIONS_DIR = os.path.join(DATA_PROCESSED, "citations")
 FULL_CORPUS_PATH = os.path.join(DATA_PROCESSED, "all_judgments_cleaned.csv")
 EDGES_OUT_DIR = os.path.join(os.path.dirname(__file__))
-
-DOMAIN_FILES = {
-    "Financial Fraud": "financial_fraud_corpus.csv",
-    "Corruption": "corruption_corpus.csv",
-    "Digital Financial Fraud": "digital_financial_fraud_corpus.csv",
-}
 
 
 def extract_self_citations(text: str):
@@ -82,8 +77,8 @@ def load_domain_membership():
     plain dict overwrite here would silently lose that and misclassify
     edges for any multi-domain judgment."""
     membership = {}
-    for domain, filename in DOMAIN_FILES.items():
-        path = os.path.join(DATA_FINAL, filename)
+    for domain in get_domains():
+        path = os.path.join(DATA_FINAL, corpus_filename(domain))
         if not os.path.exists(path):
             continue
         df = pd.read_csv(path)
@@ -107,9 +102,9 @@ def main():
     lookup = build_citation_lookup()
     membership = load_domain_membership()
 
-    for domain in DOMAIN_FILES:
+    for domain in get_domains():
         citations_path = os.path.join(
-            CITATIONS_DIR, f"{domain.lower().replace(' ', '_')}_citations.csv"
+            CITATIONS_DIR, f"{domain_to_filename(domain)}_citations.csv"
         )
         if not os.path.exists(citations_path):
             print(f"Skipping {domain} - no citations file found")
@@ -141,7 +136,7 @@ def main():
         print(f"  UNRESOLVED:      {counts.get('UNRESOLVED', 0):5d} ({counts.get('UNRESOLVED', 0)/total*100:.1f}%)")
 
         out_path = os.path.join(
-            EDGES_OUT_DIR, f"{domain.lower().replace(' ', '_')}_edges_all.csv"
+            EDGES_OUT_DIR, f"{domain_to_filename(domain)}_edges_all.csv"
         )
         edges_df.to_csv(out_path, index=False)
         print(f"  Saved (all edge types) -> {out_path}")
@@ -150,7 +145,7 @@ def main():
             ["citing_file_name", "cited_file_name"]
         ].drop_duplicates()
         internal_path = os.path.join(
-            EDGES_OUT_DIR, f"{domain.lower().replace(' ', '_')}_edges_internal.csv"
+            EDGES_OUT_DIR, f"{domain_to_filename(domain)}_edges_internal.csv"
         )
         internal_only.to_csv(internal_path, index=False)
         print(f"  Saved (internal only, deduped, for graph building) -> {internal_path}")
