@@ -1,0 +1,7 @@
+domain,nodes,edges,density,mean_in_degree,max_in_degree,pct_cited_at_least_once,pct_citing_at_least_once,pct_isolated,weak_components,nontrivial_components,largest_component_nodes,largest_component_pct,avg_path_length_largest_component,longest_shortest_path_largest_component,path_method,median_judgment_year,median_citation_lag_years,mean_citation_lag_years,edges_citing_a_newer_case,nodes_missing_year
+Corruption,548,85,0.000284,0.155109,15,5.474453,12.043796,83.941606,472,11,62,11.313869,5.413009,14.0,exact,2003.0,29.0,28.835294,0,0
+Digital Financial Fraud,42,0,0.0,0.0,0,0.0,0.0,100.0,42,0,1,2.380952,,,n/a,2021.0,,,0,0
+Financial Fraud,783,65,0.000106,0.083014,11,3.831418,7.024266,90.293742,729,18,11,1.404853,2.654545,5.0,exact,2005.0,33.0,32.738462,0,0
+Organized Crime / Extortion,955,264,0.00029,0.27644,39,5.65445,16.125654,80.104712,785,16,151,15.811518,3.398852,7.0,exact,2005.0,27.0,29.261364,0,0
+Violent Crime / Homicide,2294,571,0.000109,0.24891,25,7.323452,15.300785,78.552746,1851,41,385,16.782912,6.341058,16.0,exact,2002.0,29.0,32.525394,0,0
+Combined (all domains),4172,1371,7.9e-05,0.328619,76,7.334612,18.767977,75.575264,3222,58,859,20.589645,5.94227,15.0,exact,2003.0,29.0,32.330416,0,0
