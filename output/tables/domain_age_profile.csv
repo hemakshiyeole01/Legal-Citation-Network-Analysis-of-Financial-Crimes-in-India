@@ -1,0 +1,6 @@
+domain,cases,first_year,median_year,last_year,pct_before_1980,pct_1980_to_1999,pct_2000_onward
+Corruption,548,1953,2003.0,2025,25.547,17.883,56.569
+Digital Financial Fraud,42,1954,2021.0,2025,2.381,0.0,97.619
+Financial Fraud,783,1950,2005.0,2025,28.48,13.921,57.599
+Organized Crime / Extortion,955,1950,2005.0,2025,21.361,20.0,58.639
+Violent Crime / Homicide,2294,1950,2002.0,2025,21.491,22.537,55.972

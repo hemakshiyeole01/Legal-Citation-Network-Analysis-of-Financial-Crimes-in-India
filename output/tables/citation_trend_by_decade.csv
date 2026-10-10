@@ -1,0 +1,45 @@
+domain,decade,decade_label,cases,citations_made,citations_per_case,cases_that_cite,pct_cases_that_cite
+Corruption,1950,1950s,26,0,0.0,0,0.0
+Corruption,1960,1960s,31,0,0.0,0,0.0
+Corruption,1970,1970s,83,2,0.0241,2,2.4096
+Corruption,1980,1980s,40,4,0.1,2,5.0
+Corruption,1990,1990s,58,13,0.2241,12,20.6897
+Corruption,2000,2000s,77,15,0.1948,13,16.8831
+Corruption,2010,2010s,145,33,0.2276,22,15.1724
+Corruption,2020,2020s,88,18,0.2045,15,17.0455
+Digital Financial Fraud,1950,1950s,1,0,0.0,0,0.0
+Digital Financial Fraud,2000,2000s,3,0,0.0,0,0.0
+Digital Financial Fraud,2010,2010s,11,0,0.0,0,0.0
+Digital Financial Fraud,2020,2020s,27,0,0.0,0,0.0
+Financial Fraud,1950,1950s,47,0,0.0,0,0.0
+Financial Fraud,1960,1960s,91,1,0.011,1,1.0989
+Financial Fraud,1970,1970s,85,0,0.0,0,0.0
+Financial Fraud,1980,1980s,46,3,0.0652,3,6.5217
+Financial Fraud,1990,1990s,63,11,0.1746,11,17.4603
+Financial Fraud,2000,2000s,112,16,0.1429,9,8.0357
+Financial Fraud,2010,2010s,176,18,0.1023,17,9.6591
+Financial Fraud,2020,2020s,163,16,0.0982,14,8.589
+Organized Crime / Extortion,1950,1950s,59,0,0.0,0,0.0
+Organized Crime / Extortion,1960,1960s,66,0,0.0,0,0.0
+Organized Crime / Extortion,1970,1970s,79,15,0.1899,8,10.1266
+Organized Crime / Extortion,1980,1980s,80,17,0.2125,10,12.5
+Organized Crime / Extortion,1990,1990s,111,48,0.4324,24,21.6216
+Organized Crime / Extortion,2000,2000s,135,25,0.1852,19,14.0741
+Organized Crime / Extortion,2010,2010s,232,112,0.4828,62,26.7241
+Organized Crime / Extortion,2020,2020s,193,47,0.2435,31,16.0622
+Violent Crime / Homicide,1950,1950s,92,0,0.0,0,0.0
+Violent Crime / Homicide,1960,1960s,116,0,0.0,0,0.0
+Violent Crime / Homicide,1970,1970s,285,8,0.0281,6,2.1053
+Violent Crime / Homicide,1980,1980s,222,17,0.0766,9,4.0541
+Violent Crime / Homicide,1990,1990s,295,71,0.2407,48,16.2712
+Violent Crime / Homicide,2000,2000s,402,136,0.3383,72,17.9104
+Violent Crime / Homicide,2010,2010s,586,245,0.4181,153,26.1092
+Violent Crime / Homicide,2020,2020s,296,94,0.3176,63,21.2838
+Combined (all domains),1950,1950s,197,0,0.0,0,0.0
+Combined (all domains),1960,1960s,266,1,0.0038,1,0.3759
+Combined (all domains),1970,1970s,500,39,0.078,24,4.8
+Combined (all domains),1980,1980s,358,54,0.1508,29,8.1006
+Combined (all domains),1990,1990s,482,176,0.3651,102,21.1618
+Combined (all domains),2000,2000s,670,238,0.3552,134,20.0
+Combined (all domains),2010,2010s,1026,580,0.5653,313,30.5068
+Combined (all domains),2020,2020s,673,283,0.4205,180,26.7459

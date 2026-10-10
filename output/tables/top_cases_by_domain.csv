@@ -1,0 +1,42 @@
+domain,rank,title,year,case_domains,citations_same_domain,citations_from_outside_this_domain,citations_from_all_five_domains,pagerank_x_N,pagerank_rank_in_domain,file_name
+Corruption,1,R Balakrishna Pillai vs State Of Kerala Anr on 5 December 1995 1,1995,Corruption,5,0,5,17.156187,1,R_Balakrishna_Pillai_vs_State_Of_Kerala_Anr_on_5_December_1995_1.PDF
+Corruption,2,S A Venkataraman vs The State And Connected Appeal on 3 December 1957 1,1957,Corruption,4,0,4,12.08338,2,S_A_Venkataraman_vs_The_State_And_Connected_Appeal_on_3_December_1957_1.PDF
+Corruption,3,K Veeraswami vs Union Of India And Others on 25 July 1991 1,1991,Corruption,15,7,22,10.721548,3,K_Veeraswami_vs_Union_Of_India_And_Others_on_25_July_1991_1.PDF
+Corruption,4,State Of Orissa And Ors vs Kalicharan Mohapatra And Anr on 20 September 1995 1,1995,Corruption,1,0,1,5.509633,4,State_Of_Orissa_And_Ors_vs_Kalicharan_Mohapatra_And_Anr_on_20_September_1995_1.PDF
+Corruption,5,Krishnanand vs The State Of Madhya Pradesh on 17 December 1976 1,1976,Corruption,3,0,3,5.072508,5,Krishnanand_vs_The_State_Of_Madhya_Pradesh_on_17_December_1976_1.PDF
+Corruption,6,Kedar Nath Bajoria vs The State Of West Bengal Hari Ram on 22 May 1953 1,1953,Corruption,3,4,7,5.066391,6,Kedar_Nath_Bajoria_vs_The_State_Of_West_Bengal_Hari_Ram_on_22_May_1953_1.PDF
+Corruption,7,B C Chaturvedi vs Union Of India And Ors on 1 November 1995 1,1995,Corruption,5,1,6,4.468683,7,B_C_Chaturvedi_vs_Union_Of_India_And_Ors_on_1_November_1995_1.PDF
+Corruption,8,Kartar Singh vs State Of Punjab on 11 March 1994 1,1994,Corruption,5,41,46,4.106916,8,Kartar_Singh_vs_State_Of_Punjab_on_11_March_1994_1.PDF
+Corruption,9,The State Of Madras vs A Vaidyanatha Iyer on 26 September 1957 1,1957,Corruption,4,7,11,3.745149,9,The_State_Of_Madras_vs_A_Vaidyanatha_Iyer_on_26_September_1957_1.PDF
+Corruption,10,Om Prakash Gupta vs State Of U P With Connected Appeals on 11 January 1957 1,1957,Corruption,5,2,7,3.745149,9,Om_Prakash_Gupta_vs_State_Of_U_P_With_Connected_Appeals_on_11_January_1957_1.PDF
+Digital Financial Fraud,1,Bhagat Ram vs State Of Punjab on 9 February 1954 1,1954,Digital Financial Fraud,0,12,12,1.0,1,Bhagat_Ram_vs_State_Of_Punjab_on_9_February_1954_1.PDF
+Financial Fraud,1,Kishun Singh And Ors vs State Of Bihar on 11 January 1993 1,1993,Financial Fraud,11,1,12,52.091727,1,Kishun_Singh_And_Ors_vs_State_Of_Bihar_on_11_January_1993_1.PDF
+Financial Fraud,2,Gokak Patel Volkart Ltd vs Dundayya Gurushiddaiah Hiremath And on 14 February 1991 1,1991,Financial Fraud,3,0,3,14.813478,2,Gokak_Patel_Volkart_Ltd_vs_Dundayya_Gurushiddaiah_Hiremath_And_on_14_February_1991_1.PDF
+Financial Fraud,3,Anil Saran vs The State Of Bihar And Another on 24 August 1995 1,1995,Financial Fraud,2,0,2,10.153697,3,Anil_Saran_vs_The_State_Of_Bihar_And_Another_on_24_August_1995_1.PDF
+Financial Fraud,4,Radhey Shyam Khemka And Anr Etc vs State Of Bihar And Anr Etc on 26 March 1993 1,1993,Financial Fraud,2,1,3,7.823806,4,Radhey_Shyam_Khemka_And_Anr_Etc_vs_State_Of_Bihar_And_Anr_Etc_on_26_March_1993_1.PDF
+Financial Fraud,5,Surjit Singh Ors vs Balbir Singh on 29 February 1996 1,1996,Financial Fraud,2,1,3,7.823806,4,Surjit_Singh_Ors_vs_Balbir_Singh_on_29_February_1996_1.PDF
+Financial Fraud,6,Mohd Mumtaz vs Nandini Satpathy And Ors on 20 December 1986 1,1986,Financial Fraud,1,1,2,5.493916,6,Mohd_Mumtaz_vs_Nandini_Satpathy_And_Ors_on_20_December_1986_1.PDF
+Financial Fraud,7,Smt Sarla Mudgal President Kalyani vs Union Of India Ors on 10 May 1995 1,1995,Financial Fraud,1,1,2,5.493916,6,Smt_Sarla_Mudgal_President_Kalyani_vs_Union_Of_India_Ors_on_10_May_1995_1.PDF
+Financial Fraud,8,Dr S S Khanna vs Chief Secretary Patna Others on 12 April 1983 1,1983,Financial Fraud,1,0,1,5.493916,6,Dr_S_S_Khanna_vs_Chief_Secretary_Patna_Others_on_12_April_1983_1.PDF
+Financial Fraud,9,Municipal Committee Bahadurgarh vs Krishnan Behari And Ors on 19 February 1996 1,1996,Financial Fraud,1,0,1,5.493916,6,Municipal_Committee_Bahadurgarh_vs_Krishnan_Behari_And_Ors_on_19_February_1996_1.PDF
+Financial Fraud,10,Purushottamdas Dalmia vs The State Of West Bengal on 19 April 1961 1,1961,Financial Fraud,4,1,5,3.671357,10,Purushottamdas_Dalmia_vs_The_State_Of_West_Bengal_on_19_April_1961_1.PDF
+Organized Crime / Extortion,1,Bani Singh Ors vs State Of U P on 9 July 1996 1,1996,Organized Crime / Extortion,4,0,4,17.869453,1,Bani_Singh_Ors_vs_State_Of_U_P_on_9_July_1996_1.PDF
+Organized Crime / Extortion,2,Kartar Singh vs State Of Punjab on 11 March 1994 1,1994,Organized Crime / Extortion,28,18,46,17.804027,2,Kartar_Singh_vs_State_Of_Punjab_on_11_March_1994_1.PDF
+Organized Crime / Extortion,3,Mrs Maneka Gandhi vs Union Of India Uoi And Anr on 25 January 1978 1,1978,Organized Crime / Extortion,39,37,76,17.334796,3,Mrs_Maneka_Gandhi_vs_Union_Of_India_Uoi_And_Anr_on_25_January_1978_1.PDF
+Organized Crime / Extortion,4,A K Gopalan vs The State Of Madras Union Of India  on 19 May 1950 1,1950,Organized Crime / Extortion,17,4,21,15.588725,4,A_K_Gopalan_vs_The_State_Of_Madras_Union_Of_India__on_19_May_1950_1.PDF
+Organized Crime / Extortion,5,Union Of India Ors vs Major General Madan Lal Yadav  Retd   on 22 March 1996,1996,Organized Crime / Extortion,3,1,4,13.59943,5,Union_Of_India_Ors_vs_Major_General_Madan_Lal_Yadav__Retd___on_22_March_1996.PDF
+Organized Crime / Extortion,6,The State Of West Bengal vs Anwar All Sarkarhabib Mohamed The on 11 January 1952 1,1952,Organized Crime / Extortion,15,9,24,11.523229,6,The_State_Of_West_Bengal_vs_Anwar_All_Sarkarhabib_Mohamed_The_on_11_January_1952_1.PDF
+Organized Crime / Extortion,7,Hitendra Vishnu Thakur vs State Of Maharashtra on 12 July 1994 1,1994,Organized Crime / Extortion,16,7,23,10.07908,7,Hitendra_Vishnu_Thakur_vs_State_Of_Maharashtra_on_12_July_1994_1.PDF
+Organized Crime / Extortion,8,Ram Singh vs The State Of Delhi And Anotherbalraj on 6 April 1951 1,1951,Organized Crime / Extortion,2,3,5,8.38408,8,Ram_Singh_vs_The_State_Of_Delhi_And_Anotherbalraj_on_6_April_1951_1.PDF
+Organized Crime / Extortion,9,The State Of Bombay vs R M D Chamarbaugwala on 9 April 1957 1,1957,Organized Crime / Extortion,6,3,9,7.979981,9,The_State_Of_Bombay_vs_R_M_D_Chamarbaugwala_on_9_April_1957_1.PDF
+Organized Crime / Extortion,10,S Gopal Reddy vs State Of Andhra Pradesh on 11 July 1996 1,1996,Organized Crime / Extortion,5,2,7,6.044732,10,S_Gopal_Reddy_vs_State_Of_Andhra_Pradesh_on_11_July_1996_1.PDF
+Violent Crime / Homicide,1,Kundula Bala Subrahmanyam And Anr vs State Of Andhra Pradesh on 26 March 1993 1,1993,Violent Crime / Homicide,10,0,10,26.420733,1,Kundula_Bala_Subrahmanyam_And_Anr_vs_State_Of_Andhra_Pradesh_on_26_March_1993_1.PDF
+Violent Crime / Homicide,2,Malkiat Singh And Ors vs State Of Punjab on 10 April 1991 1,1991,Violent Crime / Homicide,9,2,11,24.6468,2,Malkiat_Singh_And_Ors_vs_State_Of_Punjab_on_10_April_1991_1.PDF
+Violent Crime / Homicide,3,Punjab Haryana High Court Bar Assn vs State Of Punjab on 7 December 1993 1,1993,Violent Crime / Homicide,3,0,3,13.61616,3,Punjab_Haryana_High_Court_Bar_Assn_vs_State_Of_Punjab_on_7_December_1993_1.PDF
+Violent Crime / Homicide,4,Dhananjoy Chaterjee vs State Of W B on 11 January 1994 1,1994,Violent Crime / Homicide,21,1,22,13.058201,4,Dhananjoy_Chaterjee_vs_State_Of_W_B_on_11_January_1994_1.PDF
+Violent Crime / Homicide,5,Sharad Birdhichand Sarda vs State Of Maharashtra on 17 July 1984 1,1984,Violent Crime / Homicide,25,2,27,11.190685,5,Sharad_Birdhichand_Sarda_vs_State_Of_Maharashtra_on_17_July_1984_1.PDF
+Violent Crime / Homicide,6,Dalip Singh And Others vs State Of Punjab on 15 May 1953 1,1953,Violent Crime / Homicide,17,0,17,10.725452,6,Dalip_Singh_And_Others_vs_State_Of_Punjab_on_15_May_1953_1.PDF
+Violent Crime / Homicide,7,Atley vs State Of Uttar Pradesh on 16 September 1955 1,1955,Violent Crime / Homicide,15,3,18,9.90898,7,Atley_vs_State_Of_Uttar_Pradesh_on_16_September_1955_1.PDF
+Violent Crime / Homicide,8,Bachan Singh vs State Of Punjab on 9 May 1980 1,1980,Violent Crime / Homicide,20,2,22,9.653389,8,Bachan_Singh_vs_State_Of_Punjab_on_9_May_1980_1.PDF
+Violent Crime / Homicide,9,Kushal Rao vs The State Of Bombay on 25 September 1957 1,1957,Violent Crime / Homicide,13,0,13,8.032216,9,Kushal_Rao_vs_The_State_Of_Bombay_on_25_September_1957_1.PDF
+Violent Crime / Homicide,10,Maru Ram And Ors vs Union Of India Uoi And Ors on 11 November 1980 1,1980,Violent Crime / Homicide,15,6,21,7.724452,10,Maru_Ram_And_Ors_vs_Union_Of_India_Uoi_And_Ors_on_11_November_1980_1.PDF

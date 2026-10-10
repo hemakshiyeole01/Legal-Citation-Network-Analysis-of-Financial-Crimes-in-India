@@ -1,0 +1,41 @@
+domain,decade,cases,pct_of_domain,decade_label,all_sc_judgments_in_decade,pct_of_all_sc_judgments
+Corruption,1950,26,4.7445,1950s,1311,1.9832
+Corruption,1960,31,5.6569,1960s,3692,0.8397
+Corruption,1970,83,15.146,1970s,3962,2.0949
+Corruption,1980,40,7.2993,1980s,3765,1.0624
+Corruption,1990,58,10.5839,1990s,3972,1.4602
+Corruption,2000,77,14.0511,2000s,3590,2.1448
+Corruption,2010,145,26.4599,2010s,3996,3.6286
+Corruption,2020,88,16.0584,2020s,2400,3.6667
+Digital Financial Fraud,1950,1,2.381,1950s,1311,0.0763
+Digital Financial Fraud,1960,0,0.0,1960s,3692,0.0
+Digital Financial Fraud,1970,0,0.0,1970s,3962,0.0
+Digital Financial Fraud,1980,0,0.0,1980s,3765,0.0
+Digital Financial Fraud,1990,0,0.0,1990s,3972,0.0
+Digital Financial Fraud,2000,3,7.1429,2000s,3590,0.0836
+Digital Financial Fraud,2010,11,26.1905,2010s,3996,0.2753
+Digital Financial Fraud,2020,27,64.2857,2020s,2400,1.125
+Financial Fraud,1950,47,6.0026,1950s,1311,3.585
+Financial Fraud,1960,91,11.622,1960s,3692,2.4648
+Financial Fraud,1970,85,10.8557,1970s,3962,2.1454
+Financial Fraud,1980,46,5.8748,1980s,3765,1.2218
+Financial Fraud,1990,63,8.046,1990s,3972,1.5861
+Financial Fraud,2000,112,14.304,2000s,3590,3.1198
+Financial Fraud,2010,176,22.4777,2010s,3996,4.4044
+Financial Fraud,2020,163,20.8174,2020s,2400,6.7917
+Organized Crime / Extortion,1950,59,6.178,1950s,1311,4.5004
+Organized Crime / Extortion,1960,66,6.911,1960s,3692,1.7876
+Organized Crime / Extortion,1970,79,8.2723,1970s,3962,1.9939
+Organized Crime / Extortion,1980,80,8.377,1980s,3765,2.1248
+Organized Crime / Extortion,1990,111,11.623,1990s,3972,2.7946
+Organized Crime / Extortion,2000,135,14.1361,2000s,3590,3.7604
+Organized Crime / Extortion,2010,232,24.2932,2010s,3996,5.8058
+Organized Crime / Extortion,2020,193,20.2094,2020s,2400,8.0417
+Violent Crime / Homicide,1950,92,4.0105,1950s,1311,7.0175
+Violent Crime / Homicide,1960,116,5.0567,1960s,3692,3.1419
+Violent Crime / Homicide,1970,285,12.4237,1970s,3962,7.1933
+Violent Crime / Homicide,1980,222,9.6774,1980s,3765,5.8964
+Violent Crime / Homicide,1990,295,12.8596,1990s,3972,7.427
+Violent Crime / Homicide,2000,402,17.524,2000s,3590,11.1978
+Violent Crime / Homicide,2010,586,25.5449,2010s,3996,14.6647
+Violent Crime / Homicide,2020,296,12.9032,2020s,2400,12.3333

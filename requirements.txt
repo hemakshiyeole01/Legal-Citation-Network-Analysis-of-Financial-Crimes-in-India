@@ -13,5 +13,10 @@ nltk
 networkx
 pyvis
 
+# Analysis and charts (Phases 4-6)
+numpy
+matplotlib
+scipy
+
 # Utility
 python-dotenv

@@ -1,0 +1,6 @@
+domain,resolved_citation_links,pct_to_own_domain,pct_to_other_domains,pct_outside_the_five_domains,links_inside_five_domains,observed_own_domain,expected_own_domain,insularity_ratio,ratio_ci_low,ratio_ci_high,expected_too_small
+Corruption,531,16.0075,27.8719,56.1205,233,85,30.5621,2.7812,2.1943,3.4289,False
+Digital Financial Fraud,64,0.0,53.125,46.875,34,0,0.1929,0.0,0.0,0.0,True
+Financial Fraud,470,13.8298,29.3617,56.8085,203,65,37.0522,1.7543,1.3383,2.2112,False
+Organized Crime / Extortion,1157,22.8176,12.2731,64.9092,406,264,88.9978,2.9664,2.6845,3.2273,False
+Violent Crime / Homicide,1461,39.0828,10.6776,50.2396,727,571,411.9106,1.3862,1.3225,1.4446,False

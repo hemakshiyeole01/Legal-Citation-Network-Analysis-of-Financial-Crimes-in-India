@@ -1,0 +1,7 @@
+domain,cases,mean_citations_same_domain,same_domain_ci_low,same_domain_ci_high,pct_cited_same_domain,mean_citations_from_all_five_domains,all_five_ci_low,all_five_ci_high,pct_cited_by_any_of_five,mean_citations_made_same_domain,median_citation_lag_years,lag_ci_low,lag_ci_high,citation_edges
+Corruption,548,0.1551,0.0894,0.2373,5.4745,0.3376,0.1734,0.5712,7.2993,0.1551,29.0,26.0,32.0,85
+Digital Financial Fraud,42,0.0,0.0,0.0,0.0,0.2857,0.0,0.8571,2.381,0.0,,,,0
+Financial Fraud,783,0.083,0.0473,0.1277,3.8314,0.2197,0.1392,0.3027,6.1303,0.083,33.0,23.0,45.0,65
+Organized Crime / Extortion,955,0.2764,0.1654,0.4105,5.6545,0.5047,0.3109,0.733,6.3874,0.2764,27.0,25.0,29.0,264
+Violent Crime / Homicide,2294,0.2489,0.1979,0.3082,7.3235,0.3112,0.2493,0.3823,7.9337,0.2489,29.0,28.0,31.0,571
+Combined (all domains),4172,0.3286,0.2704,0.3991,7.3346,0.3286,0.2704,0.3991,7.3346,0.3286,29.0,28.0,31.0,1371
