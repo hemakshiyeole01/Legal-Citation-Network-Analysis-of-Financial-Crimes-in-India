@@ -26,3 +26,8 @@ env/
 .env
 *.json
 !ontology/**/*.json
+
+# Large generated files (shared outside Git)
+data/final/pdfs/
+data/final/pdfs_missing.txt
+data/index/

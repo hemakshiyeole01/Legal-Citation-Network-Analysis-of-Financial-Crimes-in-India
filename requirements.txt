@@ -20,3 +20,10 @@ scipy
 
 # Utility
 python-dotenv
+
+# Add these to requirements.txt (Person B: API + query interface)
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pandas>=2.0
+httpx>=0.27      # needed by FastAPI's TestClient
+pytest>=8.0
