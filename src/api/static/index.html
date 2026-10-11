@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supreme Court citation explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #18202b;
+  --muted: #566274;
+  --rule: #d3d9e2;
+  --accent: #1d3a66;
+  --accent-soft: #e3eaf5;
+  --focus: #1d6fe0;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --sans: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.5 var(--sans); }
+a { color: var(--accent); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+header.top { background: var(--accent); color: #fff; padding: 22px 24px 0; }
+header.top h1 { margin: 0; font: 600 26px/1.2 var(--serif); letter-spacing: .1px; }
+header.top p { margin: 4px 0 16px; color: #c9d6ee; max-width: 70ch; }
+nav.tabs { display: flex; gap: 4px; }
+nav.tabs button { background: transparent; border: 0; color: #c9d6ee; padding: 10px 16px; cursor: pointer; border-radius: 6px 6px 0 0; font-weight: 500; }
+nav.tabs button[aria-selected="true"] { background: var(--paper); color: var(--accent); }
+
+main { max-width: 1120px; margin: 0 auto; padding: 22px 24px 60px; }
+section[hidden] { display: none; }
+
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 16px; }
+form.filters { display: grid; grid-template-columns: minmax(220px, 2.2fr) repeat(5, minmax(100px, 1fr)) auto; gap: 12px; align-items: end; }
+label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); font-weight: 500; }
+input, select { background: #fff; border: 1px solid #b9c2cf; border-radius: 6px; padding: 8px 10px; min-height: 38px; width: 100%; }
+button.primary { background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: 9px 18px; min-height: 38px; cursor: pointer; font-weight: 600; }
+button.primary:hover { background: #17305a; }
+button.link { background: none; border: 0; padding: 0; color: var(--accent); cursor: pointer; text-align: left; text-decoration: underline; text-underline-offset: 2px; }
+
+.status { margin: 14px 2px 8px; color: var(--muted); font-size: 14px; }
+.hint { grid-column: 1 / -1; margin: 0; font-size: 13.5px; color: var(--muted); }
+.snippet { margin: 8px 0 0; font-size: 14px; line-height: 1.55; color: #2b3644; max-width: 90ch; }
+mark { background: #ffe9a3; color: inherit; padding: 0 2px; border-radius: 2px; }
+.empty { padding: 28px 8px; color: var(--muted); }
+
+ul.results { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; }
+ul.results li { display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; padding: 14px 16px; border-top: 1px solid var(--rule); }
+ul.results li:first-child { border-top: 0; }
+.case-title { font: 600 17px/1.3 var(--serif); }
+.meta { color: var(--muted); font-size: 13.5px; margin-top: 3px; display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }
+.counts { display: flex; gap: 18px; align-items: start; text-align: right; }
+.counts div { min-width: 56px; }
+.counts b { display: block; font: 600 20px/1.1 var(--serif); }
+.counts span { font-size: 12.5px; color: var(--muted); }
+.row-actions { grid-column: 1 / -1; display: flex; gap: 16px; font-size: 14px; flex-wrap: wrap; }
+
+.pager { display: flex; gap: 10px; align-items: center; justify-content: flex-end; margin-top: 12px; }
+.pager button { background: #fff; border: 1px solid #b9c2cf; border-radius: 6px; padding: 7px 14px; cursor: pointer; }
+.pager button[disabled] { opacity: .45; cursor: default; }
+
+.domain-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
+.domain-card { background: var(--surface); border: 1px solid var(--rule); border-top: 5px solid var(--c); border-radius: 8px; padding: 16px; display: grid; gap: 12px; align-content: start; }
+.domain-card h3 { margin: 0; font: 600 19px/1.25 var(--serif); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 0; }
+.stats dt { font-size: 12.5px; color: var(--muted); }
+.stats dd { margin: 0; font: 600 18px/1.2 var(--serif); }
+.note { background: var(--accent-soft); border-radius: 6px; padding: 8px 10px; font-size: 13.5px; margin: 0; }
+ol.top { margin: 6px 0 0; padding-left: 20px; display: grid; gap: 6px; font-size: 14px; }
+ol.top small { color: var(--muted); }
+
+form.graph-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; align-items: end; }
+#network { height: 600px; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; margin-top: 14px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 10px; font-size: 13.5px; color: var(--muted); }
+
+dialog { width: min(980px, 94vw); max-height: 90vh; border: 0; border-radius: 10px; padding: 0; background: var(--surface); color: var(--ink); }
+dialog::backdrop { background: rgba(24, 32, 43, .55); }
+.dlg-head { padding: 20px 24px 14px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; position: sticky; top: 0; background: var(--surface); z-index: 1; }
+.dlg-head h2 { margin: 0; font: 600 23px/1.25 var(--serif); padding-right: 90px; }
+.dlg-close { position: absolute; top: 16px; right: 20px; background: #fff; border: 1px solid #b9c2cf; border-radius: 6px; padding: 6px 12px; cursor: pointer; }
+.dlg-body { padding: 18px 24px 26px; display: grid; gap: 20px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.dlg-body h3 { margin: 0 0 8px; font: 600 16px/1.3 var(--serif); }
+.cols ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; max-height: 320px; overflow: auto; }
+.cols li { font-size: 14px; }
+.cols li small { color: var(--muted); display: block; }
+.pdf-row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+a.btn { display: inline-block; background: var(--accent); color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 600; }
+.disabled-note { color: var(--muted); font-size: 14px; margin: 0; }
+#mini { height: 360px; border: 1px solid var(--rule); border-radius: 8px; }
+details summary { cursor: pointer; font-weight: 500; }
+
+@media (max-width: 860px) {
+  form.filters { grid-template-columns: 1fr 1fr; }
+  form.filters .wide { grid-column: 1 / -1; }
+  ul.results li { grid-template-columns: 1fr; }
+  .counts { text-align: left; }
+  .cols { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Supreme Court citation explorer</h1>
+  <p id="tagline">Search Indian Supreme Court judgments on financial and violent crime and follow how they cite one another.</p>
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button role="tab" id="tab-search" aria-selected="true" aria-controls="view-search">Search judgments</button>
+    <button role="tab" id="tab-domains" aria-selected="false" aria-controls="view-domains">Domains</button>
+    <button role="tab" id="tab-graph" aria-selected="false" aria-controls="view-graph">Citation graph</button>
+  </nav>
+</header>
+
+<main>
+  <section id="view-search" role="tabpanel" aria-labelledby="tab-search">
+    <form class="panel filters" id="search-form">
+      <label class="wide">Search for
+        <input id="q" type="search" placeholder="e.g. Maneka Gandhi, Kartar Singh, State of Punjab" autocomplete="off">
+      </label>
+      <label>Search in
+        <select id="f-scope">
+          <option value="title">Case names</option>
+          <option value="text">Full text of judgments</option>
+        </select>
+      </label>
+      <label>Domain
+        <select id="f-domain"></select>
+      </label>
+      <label>From year
+        <input id="f-from" type="number" min="1950" max="2025" placeholder="1950">
+      </label>
+      <label>To year
+        <input id="f-to" type="number" min="1950" max="2025" placeholder="2025">
+      </label>
+      <label>Sort by
+        <select id="f-sort">
+          <option value="">Best match</option>
+          <option value="cited_by">Most cited</option>
+          <option value="pagerank">Influence (PageRank)</option>
+          <option value="year_desc">Newest first</option>
+          <option value="year_asc">Oldest first</option>
+          <option value="title">Case name A–Z</option>
+        </select>
+      </label>
+      <button class="primary" type="submit">Search</button>
+      <p class="hint" id="scope-hint" hidden>Every word must appear in the judgment. Put words in quotes to match an exact phrase, for example "criminal breach of trust".</p>
+    </form>
+    <p class="status" id="search-status" role="status" aria-live="polite"></p>
+    <ul class="results" id="results" hidden></ul>
+    <div class="pager" id="pager" hidden>
+      <button id="prev" type="button">Previous</button>
+      <span id="page-info"></span>
+      <button id="next" type="button">Next</button>
+    </div>
+  </section>
+
+  <section id="view-domains" role="tabpanel" aria-labelledby="tab-domains" hidden>
+    <p class="status">Each domain is a set of judgments retrieved by the legal sections that define it. Citation links are counted only between judgments inside the dataset.</p>
+    <div class="domain-grid" id="domain-grid"></div>
+  </section>
+
+  <section id="view-graph" role="tabpanel" aria-labelledby="tab-graph" hidden>
+    <form class="panel graph-controls" id="graph-form">
+      <label>Domain <select id="g-domain"></select></label>
+      <label>Cases to show <input id="g-top" type="number" min="5" max="300" value="50"></label>
+      <label>Rank cases by
+        <select id="g-metric"><option value="pagerank">Influence (PageRank)</option><option value="in_degree">Times cited</option></select>
+      </label>
+      <label>From year <input id="g-from" type="number" min="1950" max="2025"></label>
+      <label>To year <input id="g-to" type="number" min="1950" max="2025"></label>
+      <button class="primary" type="submit">Draw graph</button>
+    </form>
+    <p class="status" id="graph-status" role="status" aria-live="polite"></p>
+    <div id="network" aria-label="Citation graph. Arrows point from the citing case to the cited case."></div>
+    <div class="legend" id="legend"></div>
+  </section>
+</main>
+
+<dialog id="case-dialog" aria-labelledby="dlg-title">
+  <div class="dlg-head">
+    <h2 id="dlg-title"></h2>
+    <div class="meta" id="dlg-meta"></div>
+    <button class="dlg-close" id="dlg-close" type="button">Close</button>
+  </div>
+  <div class="dlg-body" id="dlg-body"></div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.9/standalone/umd/vis-network.min.js"></script>
+<script>
+"use strict";
+const $ = (id) => document.getElementById(id);
+const PAGE = 15;
+let domains = [];
+let colorBySlug = { outside: "#9aa3af" };
+let offset = 0;
+const networks = {};
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = (n, d = 0) => (n === null || n === undefined ? "–" : Number(n).toLocaleString("en-IN", { maximumFractionDigits: d }));
+const dateText = (iso, year) => {
+  if (!iso) return year ?? "";
+  return new Date(iso + "T00:00:00").toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+};
+
+async function api(path) {
+  const res = await fetch(path);
+  if (!res.ok) {
+    let detail = res.statusText;
+    try { detail = (await res.json()).detail || detail; } catch (_) {}
+    throw new Error(typeof detail === "string" ? detail : JSON.stringify(detail));
+  }
+  return res.json();
+}
+
+function chips(names) {
+  return names.map((n) => {
+    const d = domains.find((x) => x.name === n);
+    return `<span class="chip"><span class="dot" style="background:${d ? d.color : "#999"}"></span>${esc(n)}</span>`;
+  }).join("");
+}
+
+/* tabs */
+function showTab(name) {
+  for (const t of ["search", "domains", "graph"]) {
+    $("tab-" + t).setAttribute("aria-selected", String(t === name));
+    $("view-" + t).hidden = t !== name;
+  }
+}
+for (const t of ["search", "domains", "graph"]) $("tab-" + t).addEventListener("click", () => showTab(t));
+
+/* search */
+function searchUrl() {
+  const p = new URLSearchParams();
+  if ($("q").value.trim()) p.set("q", $("q").value.trim());
+  p.set("scope", $("f-scope").value);
+  if ($("f-domain").value) p.set("domain", $("f-domain").value);
+  if ($("f-from").value) p.set("year_from", $("f-from").value);
+  if ($("f-to").value) p.set("year_to", $("f-to").value);
+  if ($("f-sort").value) p.set("sort", $("f-sort").value);
+  p.set("limit", PAGE); p.set("offset", offset);
+  return "/search?" + p.toString();
+}
+
+async function runSearch() {
+  if ($("f-scope").value === "text" && !$("q").value.trim()) {
+    $("results").hidden = true; $("pager").hidden = true;
+    $("search-status").textContent = "Enter the words to look for inside the judgments.";
+    return;
+  }
+  $("search-status").textContent = "Searching…";
+  try {
+    renderResults(await api(searchUrl()));
+  } catch (err) {
+    $("results").hidden = true; $("pager").hidden = true;
+    $("search-status").textContent = "Could not search: " + err.message;
+  }
+}
+
+function snippetHtml(parts) {
+  if (!parts || !parts.length) return "";
+  return `<p class="snippet">${parts.map((p) => p.match ? `<mark>${esc(p.text)}</mark>` : esc(p.text)).join("")}</p>`;
+}
+
+function renderResults(data) {
+  const list = $("results");
+  if (!data.results.length) {
+    list.hidden = true; $("pager").hidden = true;
+    $("search-status").textContent = "No judgments match. Try fewer words, a wider year range, or all domains.";
+    return;
+  }
+  const first = data.offset + 1, last = data.offset + data.results.length;
+  $("search-status").textContent = `${fmt(data.total)} judgment${data.total === 1 ? "" : "s"} found, showing ${first}–${last}`;
+  list.innerHTML = data.results.map((c) => `
+    <li>
+      <div>
+        <div class="case-title"><button class="link case-open" data-file="${esc(c.file_name)}">${esc(c.title)}</button></div>
+        <div class="meta"><span>${esc(dateText(c.decision_date, c.year))}</span>${chips(c.domains)}</div>
+        ${snippetHtml(c.snippet)}
+      </div>
+      <div class="counts">
+        <div><b>${fmt(c.cited_by_count)}</b><span>cited by</span></div>
+        <div><b>${fmt(c.cites_count)}</b><span>cites</span></div>
+      </div>
+      <div class="row-actions">
+        <button class="link case-open" data-file="${esc(c.file_name)}">View citations</button>
+        ${c.pdf_available
+          ? `<a href="/cases/${encodeURIComponent(c.file_name)}/pdf" target="_blank" rel="noopener">Open original PDF</a>
+             <a href="/cases/${encodeURIComponent(c.file_name)}/pdf?download=true">Download PDF</a>`
+          : `<span class="disabled-note">PDF not on this server</span>`}
+      </div>
+    </li>`).join("");
+  list.hidden = false;
+  $("pager").hidden = data.total <= PAGE;
+  $("prev").disabled = data.offset === 0;
+  $("next").disabled = last >= data.total;
+  $("page-info").textContent = `Page ${Math.floor(data.offset / PAGE) + 1} of ${Math.ceil(data.total / PAGE)}`;
+}
+
+$("search-form").addEventListener("submit", (e) => { e.preventDefault(); offset = 0; runSearch(); });
+$("f-scope").addEventListener("change", () => {
+  const text = $("f-scope").value === "text";
+  $("scope-hint").hidden = !text;
+  $("q").placeholder = text ? 'e.g. "criminal breach of trust" bank, forged cheque, section 420' : "e.g. Maneka Gandhi, Kartar Singh, State of Punjab";
+});
+$("prev").addEventListener("click", () => { offset = Math.max(0, offset - PAGE); runSearch(); window.scrollTo({ top: 0 }); });
+$("next").addEventListener("click", () => { offset += PAGE; runSearch(); window.scrollTo({ top: 0 }); });
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".case-open");
+  if (btn) openCase(btn.dataset.file);
+});
+
+/* case dialog */
+function refList(items, emptyText) {
+  if (!items.length) return `<p class="disabled-note">${emptyText}</p>`;
+  return `<ul>${items.map((r) => `
+    <li>
+      <button class="link case-open" data-file="${esc(r.file_name)}">${esc(r.title)}</button>
+      <small>${esc(dateText(r.decision_date, r.year))}${r.relation === "cross_domain" ? ", different domain" : ""}${r.cited_by_count != null ? `, cited by ${fmt(r.cited_by_count)}` : ""}</small>
+    </li>`).join("")}</ul>`;
+}
+
+async function openCase(file) {
+  const dlg = $("case-dialog");
+  $("dlg-title").textContent = "Loading…"; $("dlg-meta").innerHTML = ""; $("dlg-body").innerHTML = "";
+  if (!dlg.open) dlg.showModal();
+  try {
+    const d = await api("/cases/" + encodeURIComponent(file));
+    const c = d.case;
+    const linked = d.cites.length + d.cited_by.length > 0;
+    $("dlg-title").textContent = c.title;
+    $("dlg-meta").innerHTML = `<span>${esc(dateText(c.decision_date, c.year))}</span>${chips(c.domains)}`;
+    const metrics = d.domain_metrics.map((m) =>
+      `<li>${esc(m.domain)}: cited ${fmt(m.in_degree)} time${m.in_degree === 1 ? "" : "s"} within the domain, influence rank ${fmt(m.pagerank_rank)}</li>`).join("");
+    $("dlg-body").innerHTML = `
+      <div class="pdf-row">
+        ${d.pdf_url
+          ? `<a class="btn" href="${d.pdf_url}" target="_blank" rel="noopener">Open original PDF</a>
+             <a href="${d.pdf_url}?download=true">Download PDF</a>`
+          : `<p class="disabled-note">The original PDF is not on this server.</p>`}
+      </div>
+      <div>
+        <h3>Citation record</h3>
+        <p style="margin:0">This judgment cites ${fmt(c.cites_count)} and is cited by ${fmt(c.cited_by_count)} other judgments in the dataset.
+        It contains ${fmt(d.citations_total)} citation${d.citations_total === 1 ? "" : "s"} in total; ${fmt(d.citations_unresolved)} could not be matched to a judgment in the Supreme Court collection
+        (for example High Court or pre-1950 cases).</p>
+        ${c.self_citation ? `<p class="note" style="margin-top:8px">The extracted text of this judgment includes its own citation. That link is left out of the lists below.</p>` : ""}
+        <ul style="margin:8px 0 0;padding-left:18px;font-size:14px;color:var(--muted)">${metrics}</ul>
+      </div>
+      <div class="cols">
+        <div><h3>Cited by (${fmt(d.cited_by.length)})</h3>${refList(d.cited_by, "No judgment in the dataset cites this one.")}</div>
+        <div><h3>Cites (${fmt(d.cites.length)})</h3>${refList(d.cites, "This judgment cites no other judgment in the dataset.")}</div>
+      </div>
+      ${d.cites_outside_scope.length ? `<details><summary>Also cites ${fmt(d.cites_outside_scope.length)} Supreme Court judgment${d.cites_outside_scope.length === 1 ? "" : "s"} outside the five domains</summary>
+        <div class="cols" style="grid-template-columns:1fr;margin-top:8px">${refList(d.cites_outside_scope, "")}</div></details>` : ""}
+      <div>
+        <h3>Citation graph</h3>
+        ${linked ? `<div id="mini" aria-label="Graph of cases linked to this judgment"></div>`
+                 : `<p class="disabled-note">No citation links to draw for this judgment.</p>`}
+      </div>`;
+    if (linked) drawMini(c.file_name);
+  } catch (err) {
+    $("dlg-title").textContent = "Could not load this judgment";
+    $("dlg-body").innerHTML = `<p>${esc(err.message)}</p>`;
+  }
+}
+$("dlg-close").addEventListener("click", () => $("case-dialog").close());
+$("case-dialog").addEventListener("click", (e) => { if (e.target === $("case-dialog")) $("case-dialog").close(); });
+
+/* graphs */
+const NET_OPTIONS = {
+  nodes: { shape: "dot", font: { size: 12, face: "Public Sans" }, borderWidth: 1 },
+  edges: { arrows: { to: { enabled: true, scaleFactor: 0.5 } }, color: { color: "#9aa7b8", opacity: 0.7 }, smooth: false, width: 1 },
+  physics: { stabilization: { iterations: 200 }, barnesHut: { gravitationalConstant: -4500, springLength: 120 } },
+  interaction: { hover: true, tooltipDelay: 120 },
+};
+
+function toVis(data, centerId) {
+  const nodes = data.nodes.map((n) => ({
+    id: n.id,
+    label: n.id === centerId || data.nodes.length <= 60 ? n.label : "",
+    title: `${n.title}\n${n.year ?? ""}${n.in_degree != null ? `\nCited ${n.in_degree}×` : ""}`,
+    value: n.value || 0.2,
+    color: { background: colorBySlug[n.group] || "#888", border: "#18202b" },
+    borderWidth: n.id === centerId ? 3 : 1,
+  }));
+  return { nodes: new vis.DataSet(nodes), edges: new vis.DataSet(data.edges.map((e) => ({ from: e.source, to: e.target }))) };
+}
+
+function draw(el, key, data, centerId) {
+  if (typeof vis === "undefined") { el.innerHTML = '<p class="empty">The graph library could not be loaded. Check your internet connection and reload.</p>'; return; }
+  if (networks[key]) networks[key].destroy();
+  networks[key] = new vis.Network(el, toVis(data, centerId), NET_OPTIONS);
+  networks[key].on("doubleClick", (p) => { if (p.nodes.length) openCase(p.nodes[0]); });
+}
+
+async function drawMini(file) {
+  const el = $("mini");
+  try { draw(el, "mini", await api(`/cases/${encodeURIComponent(file)}/neighbourhood?limit=20`), file); }
+  catch (err) { el.innerHTML = `<p class="empty">${esc(err.message)}</p>`; }
+}
+
+async function runGraph() {
+  const p = new URLSearchParams({ top_n: $("g-top").value || 50, metric: $("g-metric").value });
+  if ($("g-from").value) p.set("year_from", $("g-from").value);
+  if ($("g-to").value) p.set("year_to", $("g-to").value);
+  $("graph-status").textContent = "Building graph…";
+  try {
+    const d = await api(`/domains/${$("g-domain").value}/graph?` + p.toString());
+    const el = $("network");
+    if (networks.main) { networks.main.destroy(); networks.main = null; }
+    if (!d.nodes.length) { el.innerHTML = `<p class="empty">${esc(d.message || "Nothing to draw.")}</p>`; $("graph-status").textContent = ""; return; }
+    el.innerHTML = "";
+    $("graph-status").textContent = `Showing ${fmt(d.shown_nodes)} of ${fmt(d.total_nodes)} cases and ${fmt(d.shown_edges)} of ${fmt(d.total_edges)} citation links. Larger dots are more influential. Double-click a dot to open the judgment.`;
+    draw(el, "main", d, null);
+  } catch (err) { $("graph-status").textContent = "Could not build the graph: " + err.message; }
+}
+$("graph-form").addEventListener("submit", (e) => { e.preventDefault(); runGraph(); });
+
+/* domains tab */
+async function renderDomains() {
+  const grid = $("domain-grid");
+  const cards = await Promise.all(domains.filter((d) => d.slug !== "combined").map(async (d) => {
+    const top = await api(`/domains/${d.slug}/top-cases?limit=5`);
+    const note = d.has_internal_citations ? "" :
+      `<p class="note">No judgment in this domain cites another one in this domain. Its cases cite other domains instead (see the combined graph).</p>`;
+    return `<article class="domain-card" style="--c:${d.color}">
+      <h3>${esc(d.name)}</h3>
+      <dl class="stats">
+        <div><dt>Judgments</dt><dd>${fmt(d.cases)}</dd></div>
+        <div><dt>Citation links</dt><dd>${fmt(d.edges_excluding_self_loops)}</dd></div>
+        <div><dt>Median year</dt><dd>${fmt(d.median_year)}</dd></div>
+        <div><dt>Ever cited</dt><dd>${fmt(d.pct_cited_at_least_once, 1)}%</dd></div>
+        <div><dt>Mean cited by</dt><dd>${fmt(d.mean_in_degree, 2)}</dd></div>
+        <div><dt>Since 2000</dt><dd>${fmt(d.pct_2000_onward, 0)}%</dd></div>
+      </dl>
+      ${note}
+      <div><strong>Most influential</strong>
+        <ol class="top">${top.map((t) => `<li><button class="link case-open" data-file="${esc(t.file_name)}">${esc(t.title)}</button> <small>${fmt(t.year)}, cited ${fmt(t.in_degree)}×</small></li>`).join("")}</ol>
+      </div>
+      <button class="link" data-graph="${d.slug}">Show this domain's graph</button>
+    </article>`;
+  }));
+  grid.innerHTML = cards.join("");
+}
+$("domain-grid").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-graph]");
+  if (!b) return;
+  $("g-domain").value = b.dataset.graph; showTab("graph"); runGraph();
+});
+
+/* start */
+async function init() {
+  try {
+    domains = await api("/domains");
+    domains.forEach((d) => { colorBySlug[d.slug] = d.color; });
+    const real = domains.filter((d) => d.slug !== "combined");
+    $("f-domain").innerHTML = `<option value="">All domains</option>` + real.map((d) => `<option value="${d.slug}">${esc(d.name)}</option>`).join("");
+    $("g-domain").innerHTML = domains.map((d) => `<option value="${d.slug}">${esc(d.name)}</option>`).join("");
+    $("g-domain").value = "combined";
+    const combined = domains.find((d) => d.slug === "combined");
+    $("tagline").textContent = `${fmt(combined.cases)} Supreme Court judgments, ${combined.first_year}–${combined.last_year}, across five crime domains. Search them and follow how they cite one another.`;
+    $("legend").innerHTML = real.map((d) => `<span class="chip"><span class="dot" style="background:${d.color}"></span>${esc(d.name)}</span>`).join("");
+    try {
+      const health = await api("/health");
+      if (!health.fulltext_index || !health.fulltext_index.available) {
+        const option = $("f-scope").querySelector('option[value="text"]');
+        option.disabled = true;
+        option.textContent = "Full text of judgments (index not built)";
+        $("f-scope").title = "Run python scripts/build_search_index.py, then reload this page";
+      }
+    } catch (_) { /* the search itself will report any problem */ }
+    await Promise.all([runSearch(), renderDomains()]);
+  } catch (err) {
+    $("search-status").textContent = "The data service did not respond: " + err.message;
+  }
+}
+init();
+</script>
+</body>
+</html>
